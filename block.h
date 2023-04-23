@@ -19,7 +19,7 @@ private:
 
 
 public:
-    Block(blockType);
+    Block();
 
     void setLoc(const point&);
     void setColor(const color&);

@@ -1,11 +1,26 @@
 #include "block.h"
 
-Block::Block(blockType originType) {
+Block::Block() {
+    setType(square);
+}
+
+void Block::setLoc(const point& p) {
+    loc = p;
+}
+
+void Block::setColor(const color& shade) {
+    this->shade = shade;
+    for(int i = 0; i < NUM_TILES; i++) {
+        data[i].setColor(shade);
+    }
+}
+
+void Block::setType(const blockType type) {
     point pos[NUM_TILES];
 
-    type = originType;
+    this->type = type;
 
-    switch(originType) {
+    switch(type) {
     case square:
         setColor(BLUE);
         pos[1].x = 2*data[0].getSize() + 5;
@@ -27,27 +42,37 @@ Block::Block(blockType originType) {
         pos[1].x = 2*data[0].getSize() + 5;
         pos[2].x = 4*data[0].getSize() + 10;
         pos[3].y = 2*data[0].getSize() + 5;
+        break;
+    case l_shape2:
+        setColor(YELLOW);
+        pos[1].x = 2*data[0].getSize() + 5;
+        pos[2].x = 4*data[0].getSize() + 10;
+        pos[3].x = 4*data[0].getSize() + 10;
+        pos[3].y = 2*data[0].getSize() + 5;
+        break;
+    case t_shape:
+        setColor(PURPLE);
+        pos[0].x = 2*data[0].getSize() + 5;
+        pos[1].y = 2*data[0].getSize() + 5;
+        pos[2].x = 2*data[0].getSize() + 5;
+        pos[2].y = 2*data[0].getSize() + 5;
+        pos[3].x = 4*data[0].getSize() + 10;
+        pos[3].y = 2*data[0].getSize() + 5;
+        break;
+    case z_shape:
+        setColor(ORANGE);
+        pos[1].x = 2*data[0].getSize() + 5;
+        pos[2].x = 2*data[0].getSize() + 5;
+        pos[2].y = 2*data[0].getSize() + 5;
+        pos[3].x = 4*data[0].getSize() + 10;
+        pos[3].y = 2*data[0].getSize() + 5;
+        break;
     }
 
     for(int i = 0; i < NUM_TILES; i++) {
         data[i].setLocation(pos[i]);
     }
 
-}
-
-void Block::setLoc(const point& p) {
-    loc = p;
-}
-
-void Block::setColor(const color& shade) {
-    this->shade = shade;
-    for(int i = 0; i < NUM_TILES; i++) {
-        data[i].setColor(shade);
-    }
-}
-
-void Block::setType(const blockType type) {
-    this->type = type;
 }
 
 void Block::setSize(const int s) {
@@ -104,6 +129,33 @@ void Block::move() {
         }
         data[3].move();
         break;
+    case l_shape2:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[0].move();
+            data[1].move();
+            data[2].move();
+            loc.y++;
+        }
+        data[3].move();
+        break;
+    case t_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[0].move();
+            loc.y++;
+        }
+        data[1].move();
+        data[2].move();
+        data[3].move();
+        break;
+    case z_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[0].move();
+            data[1].move();
+            loc.y++;
+        }
+        data[2].move();
+        data[3].move();
+        break;
     }
 }
 
@@ -133,14 +185,46 @@ void Block::moveLeft() {
         break;
     case l_shape1:
         if(loc.y <= NUM_ROW - (2*size)) {
-            if(data[1].getLocation().x >= 2*size) {
-                data[1].moveLeft();
-            }
-            if(data[2].getLocation().x >= 3*size) {
-                data[2].moveLeft();
-            }
             data[0].moveLeft();
             data[3].moveLeft();
+            if(!data[1].isCollide(data[0])) {
+                data[1].moveLeft();
+                data[2].moveLeft();
+                loc.x -= size;
+            }
+        }
+        break;
+    case l_shape2:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[0].moveLeft();
+            if(!data[1].isCollide(data[0])) {
+                data[1].moveLeft();
+                data[2].moveLeft();
+                data[3].moveLeft();
+                loc.x -= size;
+            }
+        }
+        break;
+    case t_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[1].moveLeft();
+            if(!data[2].isCollide(data[1])) {
+                data[0].moveLeft();
+                data[2].moveLeft();
+                data[3].moveLeft();
+                loc.x -= size;
+            }
+        }
+        break;
+    case z_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[0].moveLeft();
+            if(!data[1].isCollide(data[0])) {
+                data[1].moveLeft();
+                data[2].moveLeft();
+                data[3].moveLeft();
+                loc.x -= size;
+            }
         }
         break;
     }
@@ -172,21 +256,51 @@ void Block::moveRight() {
         break;
     case l_shape1:
         if(loc.y <= NUM_ROW - (2*size)) {
-            if(data[0].getLocation().x <= NUM_COL - (4*size)) {
-                data[0].moveRight();
-            }
-            if(data[1].getLocation().x <= NUM_COL - (3*size)) {
-                data[1].moveRight();
-            }
-            if(data[3].getLocation().x <= NUM_COL - (4*size)) {
-                data[3].moveRight();
-            }
             data[2].moveRight();
+            if(!data[1].isCollide(data[2])) {
+                data[1].moveRight();
+                data[0].moveRight();
+                data[3].moveRight();
+                loc.x += size;
+            }
+        }
+        break;
+    case l_shape2:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[2].moveRight();
+            data[3].moveRight();
+            if(!data[1].isCollide(data[2])) {
+                data[1].moveRight();
+                data[0].moveRight();
+                loc.x += size;
+            }
+        }
+        break;
+    case t_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[3].moveRight();
+            if(!data[2].isCollide(data[3])) {
+                data[0].moveRight();
+                data[1].moveRight();
+                data[2].moveRight();
+                loc.x += size;
+            }
+        }
+        break;
+    case z_shape:
+        if(loc.y <= NUM_ROW - (2*size)) {
+            data[3].moveRight();
+            if(!data[2].isCollide(data[3])) {
+                data[2].moveRight();
+                data[1].moveRight();
+                data[0].moveRight();
+                loc.x += size;
+            }
         }
         break;
     }
 }
-/*  *NOT FINISHED*
+//  *NOT FINISHED*
 void Block::rotate() {
     point pos[NUM_TILES];
 
@@ -227,4 +341,4 @@ void Block::rotate() {
         data[i].setLocation(pos[i]);
     }
 }
-*/
+

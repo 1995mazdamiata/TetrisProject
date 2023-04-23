@@ -13,7 +13,14 @@ int main(int argc, char ** argv)
     SDL_Plotter g(NUM_ROW, NUM_COL);
     char key;
 
-    Block b(square);
+    for(int i = 1; i <= NUM_COL; i++) {
+        for(int j = 1; j <= NUM_ROW; j++) {
+            g.plotPixel(i, j, BACKGROUND);
+        }
+    }
+
+    Block b;
+    b.setType(z_shape);
     b.setSize(g.getCol() / 12);
 
     /*

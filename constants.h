@@ -12,8 +12,10 @@ const color RED = color(220, 20, 20);
 const color GREEN = color(20, 220, 20);
 const color BLUE = color(20, 20 ,220);
 const color YELLOW = color(220, 220, 20);
-const color BLACK = color(0, 0, 0);
-const color BACKGROUND = color(255, 255, 255);
+const color PURPLE = color(160, 32, 240);
+const color ORANGE = color(255, 165, 0);
+const color BLACK = color(0,0,0);
+const color BACKGROUND = BLACK;
 
 enum blockType {bar, square, l_shape1, l_shape2, t_shape, z_shape};
 //enum direction (north, east, south, west);
