@@ -12,9 +12,9 @@ private:
     point prevLoc;
     color shade;
     int size;
-    int xrotation;
-    int yrotation;
-    int rotCount;
+    int xrotation[NUM_TILES];
+    int yrotation[NUM_TILES];
+    int rotCount = 0;
     blockType type;
 
 

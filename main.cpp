@@ -7,6 +7,8 @@
 
 using namespace std;
 
+
+
 int main(int argc, char ** argv)
 {
 
@@ -20,14 +22,8 @@ int main(int argc, char ** argv)
     }
 
     Block b;
-    b.setType(z_shape);
+    b.setType(l_shape2);
     b.setSize(g.getCol() / 12);
-
-    /*
-    tile a;
-    a.setColor(RED);
-    a.setSize(g.getCol() / 12);
-    */
 
     while (!g.getQuit()){
 		if(g.kbhit()){
