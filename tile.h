@@ -30,6 +30,7 @@ class tile{
         void setSize(int);
 
         void draw(SDL_Plotter& g);
+        void erase(SDL_Plotter& g);
         void move();
         void moveRight();
         void moveLeft();

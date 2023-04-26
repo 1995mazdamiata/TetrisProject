@@ -45,6 +45,14 @@ void tile::draw(SDL_Plotter& g)
     prevLoc = loc;
 }
 
+void tile::erase(SDL_Plotter& g) {
+    for(int r = 0; r < size; r++) {
+        for(int c = 0; c < size; c++) {
+            g.plotPixel(loc.x + c, loc.y + r, BACKGROUND);
+        }
+    }
+}
+
 point tile::getLocation() const
 {
     return loc;
@@ -62,7 +70,6 @@ int tile::getSize() const
 
 void tile::setLocation(const point& p)
 {
-    //prevLoc = loc;
     if((p.x >= 0) && (p.y >= 0) &&
        (p.x < NUM_COL - size) && (p.y < NUM_ROW - size)) {
            loc = p;

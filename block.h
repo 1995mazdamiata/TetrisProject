@@ -29,13 +29,15 @@ public:
     point getLoc() const;
     color getShade() const;
     blockType getType() const;
-    int getSize();
+    int getSize() const;
+    tile getTile(int index) const;
 
     void draw(SDL_Plotter& g);
     void move();
     void moveRight();
     void moveLeft();
     void rotate();
+
 
 };
 

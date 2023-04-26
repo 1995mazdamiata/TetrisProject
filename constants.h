@@ -3,10 +3,10 @@
 
 #include "SDL_Plotter.h"
 
-const int NUM_ROW = 765;
+const int NUM_ROW = 766;
 const int NUM_COL = 541;
 const int HEIGHT_IN_TILES = 17;
-const int WIDTH_IN_TILES = 8;
+const int WIDTH_IN_TILES = 12;
 
 const int NUM_TILES = 4;
 

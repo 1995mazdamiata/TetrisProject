@@ -16,10 +16,15 @@ int main(int argc, char ** argv)
     char key;
     point origin(45*5, 0);
     Block b;
+    board Board1;
+    bool collided = false;
 
     drawBackground(g, BACKGROUND);
-    b.setType(bar);
+    b.setType(randomBlock());
     b.setSize(g.getCol() / 12);
+    b.setLoc(origin);
+
+    b.setType(randomBlock());
     b.setLoc(origin);
 
     while (!g.getQuit()){
@@ -27,21 +32,51 @@ int main(int argc, char ** argv)
             key = g.getKey();
             switch(key) {
                 case RIGHT_ARROW:
-                    b.moveRight();
+                    if(!Board1.collision(b)) {
+                     b.moveRight();
+                    }
+                    else {
+                        collided = true;
+                    }
                     break;
                 case LEFT_ARROW:
-                    b.moveLeft();
+                    if(!Board1.collision(b)) {
+                        b.moveLeft();
+                    }
+                    else {
+                        collided = true;
+                    }
                     break;
                 case UP_ARROW:
-                    b.rotate();
+                    if(!Board1.collision(b)) {
+                        b.rotate();
+                    }
+                    else {
+                        collided = true;
+                    }
                     break;
             }
-		}
-
-        b.move();
+        }
+        if(!Board1.collision(b)) {
+            b.move();
+        }
+        else {
+            collided = true;
+        }
         b.draw(g);
 		g.update();
-		g.Sleep(10);
+
+        if((b.getLoc().y > NUM_ROW - (2*b.getSize()))
+           || collided) {
+            Board1.replaceBlockWithTiles(b);
+            b.setType(randomBlock());
+            b.setLoc(origin);
+            updateBoard(Board1, g);
+            collided = false;
+        }
+        Board1.drawBoard(g);
+
+		g.Sleep(5);
 
     }
 }

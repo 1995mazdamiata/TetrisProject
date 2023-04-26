@@ -11,8 +11,8 @@ void Block::setLoc(const point& p) {
         a.y = data[i].getLocation().y + p.y;
         data[i].setLocation(a);
     }
-    loc.x += p.x;
-    loc.y += p.y;
+    loc.x = p.x;
+    loc.y = p.y;
 }
 
 void Block::setColor(const color& shade) {
@@ -24,16 +24,17 @@ void Block::setColor(const color& shade) {
 
 void Block::setType(const blockType type) {
     point pos[NUM_TILES];
+    rotCount = 0;
 
     this->type = type;
 
     switch(type) {
     case square:
         setColor(BLUE);
-        pos[1].x = 2*data[0].getSize() + 5;
-        pos[2].y = 2*data[0].getSize() + 5;
-        pos[3].x = 2*data[0].getSize() + 5;
-        pos[3].y = 2*data[0].getSize() + 5;
+        pos[1].x = data[0].getSize();
+        pos[2].y = data[0].getSize();
+        pos[3].x = data[0].getSize();
+        pos[3].y = data[0].getSize();
         break;
     case bar:
         setColor(RED);
@@ -45,9 +46,9 @@ void Block::setType(const blockType type) {
         yrotation[2] = 0;
         xrotation[3] = -2;
         yrotation[3] = 1;
-        pos[1].x = 2*data[0].getSize() + 5;
-        pos[2].x = 4*data[0].getSize() + 10;
-        pos[3].x = 6*data[0].getSize() + 15;
+        pos[1].x = data[0].getSize();
+        pos[2].x = 2*data[0].getSize();
+        pos[3].x = 3*data[0].getSize();
         break;
     case l_shape1:
         setColor(GREEN);
@@ -59,9 +60,9 @@ void Block::setType(const blockType type) {
         yrotation[2] = 1;
         xrotation[3] = 0;
         yrotation[3] = -2;
-        pos[1].x = 2*data[0].getSize() + 5;
-        pos[2].x = 4*data[0].getSize() + 10;
-        pos[3].y = 2*data[0].getSize() + 5;
+        pos[1].x = data[0].getSize();
+        pos[2].x = 2*data[0].getSize();
+        pos[3].y = data[0].getSize();
         break;
     case l_shape2:
         setColor(YELLOW);
@@ -73,10 +74,10 @@ void Block::setType(const blockType type) {
         yrotation[2] = 1;
         xrotation[3] = -2;
         yrotation[3] = 0;
-        pos[1].x = 2*data[0].getSize() + 5;
-        pos[2].x = 4*data[0].getSize() + 10;
-        pos[3].x = 4*data[0].getSize() + 10;
-        pos[3].y = 2*data[0].getSize() + 5;
+        pos[1].x = data[0].getSize();
+        pos[2].x = 2*data[0].getSize();
+        pos[3].x = 2*data[0].getSize();
+        pos[3].y = data[0].getSize();
         break;
     case t_shape:
         setColor(PURPLE);
@@ -88,12 +89,12 @@ void Block::setType(const blockType type) {
         yrotation[2] = 0;
         xrotation[3] = -1;
         yrotation[3] = 1;
-        pos[0].x = 2*data[0].getSize() + 5;
-        pos[1].y = 2*data[0].getSize() + 5;
-        pos[2].x = 2*data[0].getSize() + 5;
-        pos[2].y = 2*data[0].getSize() + 5;
-        pos[3].x = 4*data[0].getSize() + 10;
-        pos[3].y = 2*data[0].getSize() + 5;
+        pos[0].x = data[0].getSize();
+        pos[1].y = data[0].getSize();
+        pos[2].x = data[0].getSize();
+        pos[2].y = data[0].getSize();
+        pos[3].x = 2*data[0].getSize();
+        pos[3].y = data[0].getSize();
         break;
     case z_shape:
         setColor(ORANGE);
@@ -105,11 +106,11 @@ void Block::setType(const blockType type) {
         yrotation[2] = -1;
         xrotation[3] = -2;
         yrotation[3] = 0;
-        pos[1].x = 2*data[0].getSize() + 5;
-        pos[2].x = 2*data[0].getSize() + 5;
-        pos[2].y = 2*data[0].getSize() + 5;
-        pos[3].x = 4*data[0].getSize() + 10;
-        pos[3].y = 2*data[0].getSize() + 5;
+        pos[1].x = data[0].getSize();
+        pos[2].x = data[0].getSize();
+        pos[2].y = data[0].getSize();
+        pos[3].x = 2*data[0].getSize();
+        pos[3].y = data[0].getSize();
         break;
     }
 
@@ -136,6 +137,14 @@ color Block::getShade() const {
 
 blockType Block::getType() const {
     return type;
+}
+
+int Block::getSize() const {
+    return size;
+}
+
+tile Block::getTile(int index) const {
+    return data[index];
 }
 
 void Block::draw(SDL_Plotter& g) {
