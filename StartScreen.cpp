@@ -21,7 +21,7 @@ void start::openScreen(){
         cout << "Error renderer creation";
     }
 
-    SDL_Surface* tetris_sur = IMG_Load("/Users/Olivia/tetris.png");
+    SDL_Surface* tetris_sur = IMG_Load("tetris.png");
     if (tetris_sur == NULL) {
         cout << "Error loading image: " << IMG_GetError();
     }
