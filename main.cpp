@@ -4,7 +4,7 @@
 #include "tile.h"
 #include "block.h"
 #include "constants.h"
-#include "StartScreen.h"
+#include "Board.h"
 
 using namespace std;
 
@@ -12,21 +12,15 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-    start s;
-    s.openScreen();
-
     SDL_Plotter g(NUM_ROW, NUM_COL);
     char key;
-
-    for(int i = 1; i <= NUM_COL; i++) {
-        for(int j = 1; j <= NUM_ROW; j++) {
-            g.plotPixel(i, j, BACKGROUND);
-        }
-    }
-
+    point origin(45*5, 0);
     Block b;
-    b.setType(l_shape2);
+
+    drawBackground(g, BACKGROUND);
+    b.setType(bar);
     b.setSize(g.getCol() / 12);
+    b.setLoc(origin);
 
     while (!g.getQuit()){
 		if(g.kbhit()){

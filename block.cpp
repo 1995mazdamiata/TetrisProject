@@ -5,7 +5,14 @@ Block::Block() {
 }
 
 void Block::setLoc(const point& p) {
-    loc = p;
+    point a;
+    for(int i = 0; i < NUM_TILES; i++) {
+        a.x = data[i].getLocation().x + p.x;
+        a.y = data[i].getLocation().y + p.y;
+        data[i].setLocation(a);
+    }
+    loc.x += p.x;
+    loc.y += p.y;
 }
 
 void Block::setColor(const color& shade) {
