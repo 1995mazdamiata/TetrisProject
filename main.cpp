@@ -4,6 +4,7 @@
 #include "tile.h"
 #include "block.h"
 #include "constants.h"
+#include "StartScreen.h"
 
 using namespace std;
 
@@ -11,6 +12,8 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
+    start s;
+    s.openScreen();
 
     SDL_Plotter g(NUM_ROW, NUM_COL);
     char key;
