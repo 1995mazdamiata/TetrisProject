@@ -38,6 +38,14 @@ void board::dropRows(int row) {
     }
 }
 
+void drawBackground(SDL_Plotter& g ,color c) {
+    for(int i = 1; i <= NUM_COL; i++) {
+        for(int j = 1; j <= NUM_ROW; j++) {
+            g.plotPixel(i, j, c);
+        }
+    }
+}
+
 /* CURRENTLY NOT ATTACHED TO ANY FUNCTION CALLS
 for (int r = 0; r < HEIGHT_IN_TILES; r++) {
     tile t;

@@ -3,16 +3,11 @@
 
 #include <iostream>
 #include <cmath>
-#include "SDL_Plotter.h"
-#include "tile.h"
+
 #include "block.h"
 #include "constants.h"
-#include "EndScreen.h"
-#include "Board.h"
 
 using namespace std;
-
-
 
 struct board{
 
@@ -23,6 +18,7 @@ struct board{
 
 };
 
+void drawBackground(SDL_Plotter& g, color c);
 void updateBoard(board& a/*int& score?*/);
 
 #endif // BOARD_H_INCLUDED
