@@ -92,6 +92,17 @@ bool board::collision(Block b) {
     return collision;
 }
 
+bool board::bottom(Block b) {
+    bool bottomed = false;
+    int size = b.getSize();
+    for(int i = 0; i < NUM_TILES; i++) {
+        if(b.getTile(i).getLocation().y > NUM_ROW - size - 2) {
+            bottomed = true;
+        }
+    }
+    return bottomed;
+}
+
 void drawBackground(SDL_Plotter& g ,color c) {
     for(int i = 1; i <= NUM_COL; i++) {
         for(int j = 1; j <= NUM_ROW; j++) {

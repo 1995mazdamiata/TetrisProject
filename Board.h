@@ -22,6 +22,7 @@ struct board{
     void deleteRow(int row);
     void dropRows(int row);
     bool collision(Block b);
+    bool bottom(Block b);
 
 };
 

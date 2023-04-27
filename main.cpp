@@ -66,8 +66,7 @@ int main(int argc, char ** argv)
         b.draw(g);
 		g.update();
 
-        if((b.getLoc().y > NUM_ROW - (2*b.getSize()))
-           || collided) {
+        if(Board1.bottom(b) || collided) {
             Board1.replaceBlockWithTiles(b);
             b.setType(randomBlock());
             b.setLoc(origin);
