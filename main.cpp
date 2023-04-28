@@ -5,6 +5,7 @@
 #include "block.h"
 #include "constants.h"
 #include "Board.h"
+#include "StartScreen.h"
 
 using namespace std;
 
