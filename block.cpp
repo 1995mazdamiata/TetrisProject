@@ -1,12 +1,3 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #include "block.h"
 
 Block::Block() {
@@ -39,14 +30,14 @@ void Block::setType(const blockType type) {
 
     switch(type) {
     case square:
-        setColor(BLUE);
+        setColor(YELLOW);
         pos[1].x = data[0].getSize();
         pos[2].y = data[0].getSize();
         pos[3].x = data[0].getSize();
         pos[3].y = data[0].getSize();
         break;
     case bar:
-        setColor(RED);
+        setColor(LIGHTBLUE);
         xrotation[0] = 1;
         yrotation[0] = -2;
         xrotation[1] = 0;
@@ -60,7 +51,7 @@ void Block::setType(const blockType type) {
         pos[3].x = 3*data[0].getSize();
         break;
     case l_shape1:
-        setColor(GREEN);
+        setColor(ORANGE);
         xrotation[0] = 1;
         yrotation[0] = -1;
         xrotation[1] = 0;
@@ -74,7 +65,7 @@ void Block::setType(const blockType type) {
         pos[3].y = data[0].getSize();
         break;
     case l_shape2:
-        setColor(YELLOW);
+        setColor(BLUE);
         xrotation[0] = 1;
         yrotation[0] = -1;
         xrotation[1] = 0;
@@ -106,7 +97,7 @@ void Block::setType(const blockType type) {
         pos[3].y = data[0].getSize();
         break;
     case z_shape:
-        setColor(ORANGE);
+        setColor(GREEN);
         xrotation[0] = 1;
         yrotation[0] = -1;
         xrotation[1] = 0;

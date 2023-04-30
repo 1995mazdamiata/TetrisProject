@@ -1,12 +1,3 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #include "score.h"
 
 scoreCounter::scoreCounter() {
@@ -19,19 +10,8 @@ scoreCounter::scoreCounter(int x, int y) {
     speed = y;
 }
 
-void scoreCounter::incScoreRow(int numLines) {
-    if(numLines == 1) {
-        score += 100;
-    }
-    else if(numLines == 2) {
-        score += 300;
-    }
-    else if(numLines == 3) {
-        score += 450;
-    }
-    else if(numLines == 4) {
-        score += 600;
-    }
+void scoreCounter::incScoreRow() {
+    score += 1000;
 }
 
 void scoreCounter::incScoreBlock() {
@@ -51,15 +31,30 @@ int scoreCounter::getSpeed() {
 
 void scoreCounter::gameSpeed() {
     if(score >= 5000) {
-        speed = 7;
+        speed = 4;
     }
-    if(score >= 12500) {
-        speed = 5;
-    }
-    if(score >= 22500) {
+    if(score >= 10000) {
         speed = 3;
     }
-    if(score >= 35000) {
+    if(score >= 15000) {
+        speed = 2;
+    }
+    if(score >= 20000) {
+        speed = 1.5;
+    }
+    if(score >= 25000) {
         speed = 1;
+    }
+    if(score >= 30000) {
+        speed = 0.8;
+    }
+    if(score >= 35000) {
+        speed = 0.6;
+    }
+    if(score >= 40000) {
+        speed = 0.5;
+    }
+    if(score >= 45000) {
+        speed = 0.25;
     }
 }

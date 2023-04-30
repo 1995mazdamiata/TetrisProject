@@ -1,32 +1,32 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #ifndef SCORE_H_INCLUDED
 #define SCORE_H_INCLUDED
 
 #include <cstdlib>
 #include <time.h>
+
 using namespace std;
 
 class scoreCounter {
     private:
-        int score, speed;
+        int score;
+        double speed;
 
     public:
         scoreCounter();
         scoreCounter(int, int);
 
-        void incScoreRow(int);
+        void incScoreRow();
         void incScoreBlock();
 
         int getScore();
         int getSpeed();
+
+        void setSpeed(double s) {
+            speed = s;
+        }
+        void setScore(int s) {
+            score = s;
+        }
 
         void gameSpeed();
 };

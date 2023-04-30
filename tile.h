@@ -1,12 +1,3 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #ifndef TILE_H_INCLUDED
 #define TILE_H_INCLUDED
 
@@ -25,7 +16,7 @@ class tile{
     public:
         tile()
         {
-            size = 20;
+            size = 45;
         }
 
         //access functions

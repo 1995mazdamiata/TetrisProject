@@ -1,12 +1,3 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #include "tile.h"
 
 void tile::move()

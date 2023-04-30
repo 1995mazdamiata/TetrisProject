@@ -1,12 +1,3 @@
-// Author: Olivia Calusinski, Alex Truitt,
-// Aiden Highsmith, Jackson Davidson,
-// Jacob Meyer, Nick Storti, Piya Patel
-// Assignment Title: Tetris
-// Assignment Description: Tetris
-// Due Date: 5/3/2023
-// Date Created: 4/3/2023
-// Date Last Modified: 5/3/2023
-
 #include "Board.h"
 
 
@@ -50,7 +41,7 @@ void board::drawBoard(SDL_Plotter& g) {
     }
 }
 
-void updateBoard(board& a, SDL_Plotter& g) {
+void updateBoard(board& a, SDL_Plotter& g, scoreCounter& c) {
     int count;
     for (int r = 0; r < HEIGHT_IN_TILES; r++) {
         count = 0;
@@ -62,6 +53,8 @@ void updateBoard(board& a, SDL_Plotter& g) {
         if (count == 12) {
             a.deleteRow(r);
             a.dropRows(r);
+            c.incScoreRow();
+            c.gameSpeed();
         }
     }
 }
@@ -86,12 +79,54 @@ bool board::collision(Block b) {
     int size = b.getSize();
     for(int r = 0; r < HEIGHT_IN_TILES; r++) {
         for(int c = 0; c < WIDTH_IN_TILES; c++) {
-            if(filledTiles[r][c]) {
+            if(filledTiles[r][c] && !filledTiles[r - 1][c]) {
                 for(int i = 0; i < NUM_TILES; i++) {
                     if((abs(b.getTile(i).getLocation().x
                        - data[r][c].getLocation().x) < size)
                        && (abs(b.getTile(i).getLocation().y
                        - data[r][c].getLocation().y) < size)) {
+                        collision = true;
+                    }
+                }
+            }
+        }
+    }
+    return collision;
+}
+
+bool board::lateralCollisionRight(Block b) {
+    bool collision = false;
+    int size = b.getSize();
+    for(int r = 0; r < HEIGHT_IN_TILES; r++) {
+        for(int c = 0; c < WIDTH_IN_TILES; c++) {
+            if(filledTiles[r][c] &&
+              !filledTiles[r][c - 1]) {
+                for(int i = 0; i < NUM_TILES; i++) {
+                    if((abs(b.getTile(i).getLocation().x
+                      - data[r][c].getLocation().x) < size + 1)
+                      && (abs(b.getTile(i).getLocation().y
+                      - data[r][c].getLocation().y) < size)) {
+                        collision = true;
+                    }
+                }
+            }
+        }
+    }
+    return collision;
+}
+
+bool board::lateralCollisionLeft(Block b) {
+    bool collision = false;
+    int size = b.getSize();
+    for(int r = 0; r < HEIGHT_IN_TILES; r++) {
+        for(int c = 0; c < WIDTH_IN_TILES; c++) {
+            if(filledTiles[r][c] &&
+              !filledTiles[r][c + 1]) {
+                for(int i = 0; i < NUM_TILES; i++) {
+                    if((abs(b.getTile(i).getLocation().x
+                      - data[r][c].getLocation().x) < size + 1)
+                      && (abs(b.getTile(i).getLocation().y
+                      - data[r][c].getLocation().y) < size)) {
                         collision = true;
                     }
                 }
@@ -112,9 +147,33 @@ bool board::bottom(Block b) {
     return bottomed;
 }
 
+bool board::endGame() {
+    bool over = false;
+    int count = 0;
+    int row = 0;
+    for(int c = 0; c < WIDTH_IN_TILES; c++) {
+        if(filledTiles[row][c]) {
+            count++;
+        }
+    }
+    if(count > 1) {
+        over = true;
+    }
+    return over;
+}
+
+void board::resetBoard(SDL_Plotter& g) {
+    for(int r = 0; r < HEIGHT_IN_TILES; r++) {
+        for(int c = 0; c < WIDTH_IN_TILES; c++) {
+            filledTiles[r][c] = false;
+            data[r][c].setColor(BACKGROUND);
+        }
+    }
+}
+
 void drawBackground(SDL_Plotter& g ,color c) {
-    for(int i = 1; i <= NUM_COL; i++) {
-        for(int j = 1; j <= NUM_ROW; j++) {
+    for(int i = 0; i < NUM_COL; i++) {
+        for(int j = 0; j < NUM_ROW; j++) {
             g.plotPixel(i, j, c);
         }
     }
@@ -149,19 +208,3 @@ blockType randomBlock() {
     }
     return type;
 }
-
-/* CURRENTLY NOT ATTACHED TO ANY FUNCTION CALLS
-for (int r = 0; r < HEIGHT_IN_TILES; r++) {
-    tile t;
-    for (int c = 0; c < WIDTH_IN_TILES; c++) {
-        if (a[r][c] == true) {
-            // Draw tile
-        }
-        else {
-            // Erase
-        }
-        // This may not be the most efficient, but because it redraws the board based on how it is filled,
-        // but I think it should work well
-    }
-}
-*/
