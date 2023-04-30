@@ -89,11 +89,11 @@ void displayString(SDL_Plotter& g, string s, int x, int y, int size) {
         int prev = 0;
         font curr;
         for (unsigned int i = 0; i < s.size(); i++) {
-            string letter = "/Users/Olivia/fonts/N.txt";
+            string letter = "/fonts/N.txt";
             char let;
             let = s.at(i);
             if(!isspace(let)){
-                letter.at(20) = let;
+                letter.at(7) = let;
                 curr.init(letter);
                 curr.display(g, x+prev, y, size);
                 prev += (14 * size);
