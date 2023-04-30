@@ -6,6 +6,7 @@
 #include "constants.h"
 #include "Board.h"
 #include "score.h"
+#include "font.h"
 
 using namespace std;
 
@@ -29,9 +30,9 @@ int main(int argc, char ** argv)
 
     while (!g.getQuit()){
         if(!start) {
-            drawBackground(g, BLACK);
-            //start screen here
-
+            drawBackground(g, START);
+            displayString(g, "TETRIS", 145,300,3);
+            displayString(g, "PRESS ANY KEY TO BEGIN", 120,375,1);
             if(g.kbhit()) {
                 start = true;
             }
@@ -96,8 +97,9 @@ int main(int argc, char ** argv)
             g.update();
         }
         else if(gameOver) {
-            drawBackground(g, BLUE);
-            //game over screen here
+            drawBackground(g, RED);
+            displayString(g, "GAME OVER", 100, 300, 3);
+            displayString(g, "PRESS ANY KEY TO CONTINUE", 120,375,1);
 
             if(g.kbhit()) {
                 key = g.getKey();
