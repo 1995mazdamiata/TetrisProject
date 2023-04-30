@@ -21,6 +21,7 @@ const color PURPLE = color(160, 32, 240);
 const color BLACK = color(0,0,0);
 const color GRAY = color(127, 127, 127);
 const color BACKGROUND = GRAY;
+const color START = color(36, 128, 156);
 
 enum blockType {bar, square, l_shape1, l_shape2, t_shape, z_shape};
 
