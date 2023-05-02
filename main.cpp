@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <string>
+#include <sstream>
 #include "SDL_Plotter.h"
 #include "tile.h"
 #include "block.h"
@@ -15,17 +17,20 @@ using namespace std;
 int main(int argc, char ** argv)
 {
     SDL_Plotter g(NUM_ROW, NUM_COL + SCORE_HEIGHT);
-    char key;
-    point origin(45*5, 0);
     Block b;
     vector<board> boards;
     board Board1;
-    int count = 0;
     scoreCounter counter;
+    point origin(45*5, 0);
+    stringstream ss;
+    int count = 0;
+    int scoreInt;
+    string scoreStr;
     bool collided = false;
     bool start = false;
     bool initialize = true;
     bool gameOver = false;
+    char key;
 
 
     while (!g.getQuit()){
@@ -41,7 +46,7 @@ int main(int argc, char ** argv)
         else if(initialize){
             boards.push_back(Board1);
             drawBackground(g, BACKGROUND);
-            counter.setSpeed(0.25);
+            counter.setSpeed(2.5);
             counter.setScore(0);
             b.setSize(NUM_COL / 12);
             b.setType(randomBlock());
@@ -78,6 +83,22 @@ int main(int argc, char ** argv)
             }
             b.draw(g);
 
+            ss.clear();
+            ss.str("");
+            scoreInt = counter.getScore();
+            ss << scoreInt;
+            ss >> scoreStr;
+
+            for(int c = NUM_COL; c < NUM_COL + SCORE_HEIGHT; c++) {
+                for(int r = 0; r < NUM_ROW; r++) {
+                    g.plotPixel(c, r, WHITECOLOR);
+                }
+            }
+            displayString(g, "SCORE", 560, 300, 1);
+            displayString(g, scoreStr, 560, 330, 1);
+
+            g.update();
+
             if(boards[count].bottom(b) || collided) {
                 if(boards[count].endGame()) {
                     boards[count].resetBoard(g);
@@ -94,7 +115,6 @@ int main(int argc, char ** argv)
             }
             boards[count].drawBoard(g);
             g.Sleep(counter.getSpeed());
-            g.update();
         }
         else if(gameOver) {
             drawBackground(g, RED);

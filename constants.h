@@ -20,6 +20,7 @@ const color BLUE = color(0, 0 ,255);
 const color PURPLE = color(160, 32, 240);
 const color BLACK = color(0,0,0);
 const color GRAY = color(127, 127, 127);
+const color WHITECOLOR = color(255, 255, 255);
 const color BACKGROUND = GRAY;
 const color START = color(36, 128, 156);
 
