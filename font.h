@@ -24,6 +24,16 @@ const int MAX_FONT_SIZE = 25;
 class font{
     public:
         font() {;}
+
+        /*
+         * description: initializes a font file. opens a file
+         *         with the specific letter
+         * return: nothing
+         * precondition: name of font file passed as argument. The font
+         *         file exists and has properly formatted data
+         * postcondition: The data from the font file is stored in
+         *         a class array.
+         */
         void init(string fname) {
             ifstream input;
             input.open(fname);
@@ -38,8 +48,14 @@ class font{
             input.close();
         }
 
-
-
+        /*
+         * description: displays a letter to the pixel drawing with a font
+         * return: nothing
+         * precondition: takes a plotter object, x and y coordinates, and
+         *         size as arguments. the class data object has the letter
+         *         data
+         * postcondition: The letter is drawn on the pixel drawing.
+         */
         void display(SDL_Plotter& g, int x, int y, int size) {
             for (int r = 0; r < row; r++) {
                 for (int c = 0; c < col; c++) {
@@ -49,12 +65,18 @@ class font{
                                 g.plotPixel(xoff + x + (c*size), yoff + y + (r*size), BLACK);
                             }
                          }
-                         //g.plotPixel(x+c, y+r, 0, 255, 255);
                     }
                 }
             }
         }
 
+        /*
+         * description: function sets the size of displayed letter
+         * return: nothing
+         * precondition: integer parameter passed as argument
+         * postcondition: class variable size set to value of
+         *         integer argument
+         */
         void setSize(int n) {
             if (n >= 1) {
                 size = n;
@@ -68,6 +90,12 @@ class font{
         int size = 1;
 };
 
+/*
+ * description: function finds files for special characters
+ * return: string
+ * precondition: character passed as argument. font file exists
+ * postcondition: font file name returned as a string.
+ */
 string findFont(char c) {
     string Font;
 
@@ -88,7 +116,15 @@ string findFont(char c) {
     return Font;
 }
 
-// It takes the plotter, the string to write, and the initial coords
+/*
+ * description: function displays a string to the screen in a given font
+ * return: nothing
+ * precondition: plotter object, string to be displayed, x and y
+ *         coordinates, and size passed as arguments. A font file for
+ *         each character in the string exists.
+ * postcondition: A string is drawn to the pixel drawing according
+ *         to the parameters passed as arguments
+ */
 void displayString(SDL_Plotter& g, string s, int x, int y, int size) {
         int prev = 0;
         font curr;
