@@ -89,7 +89,7 @@ void displayString(SDL_Plotter& g, string s, int x, int y, int size) {
         int prev = 0;
         font curr;
         for (unsigned int i = 0; i < s.size(); i++) {
-            string letter = "/fonts/ .txt";
+            string letter = "fonts// .txt";
             char let;
             let = s.at(i);
             if(!isspace(let)){
