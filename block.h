@@ -5,6 +5,15 @@
 #include "SDL_Plotter.h"
 #include "constants.h"
 
+/* 
+Description: A block class that contains private variables and
+public functions that arrange tiles together into blocks.
+Precondition: The game must be started and the player must not have
+lost yet.
+Postcondition: Functions allow the block to be moved and acted on in other ways.
+Return: Point, color, blockType, int, tile, or void
+*/
+
 class Block{
 private:
     tile data[NUM_TILES];
