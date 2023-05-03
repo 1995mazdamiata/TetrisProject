@@ -125,7 +125,7 @@ int main(int argc, char ** argv)
 
             if(g.kbhit()) {
                 key = g.getKey();
-                if(key = DOWN_ARROW) {
+                if(key == DOWN_ARROW) {
                     gameOver = false;
                     start = false;
                     initialize = true;
