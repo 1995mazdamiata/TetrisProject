@@ -68,12 +68,6 @@ class font{
         int size = 1;
 };
 
-/*This is not quite complete, other
-symbols still need to be added. Also
-below it pulls from a folder called "Fonts"
-so keep that in mind. If you want to use extra
-symbols, you'll have to add them to this function*/
-
 string findFont(char c) {
     string Font;
 
@@ -99,7 +93,7 @@ void displayString(SDL_Plotter& g, string s, int x, int y, int size) {
         int prev = 0;
         font curr;
         for (unsigned int i = 0; i < s.size(); i++) {
-            string letter = "/fonts/ .txt";
+            string letter = "fonts// .txt";
             char let;
             let = s.at(i);
             if(!isspace(let)){
@@ -113,8 +107,5 @@ void displayString(SDL_Plotter& g, string s, int x, int y, int size) {
             }
         }
 }
-
-//curr.init("Fonts\\" + findFont(s.at(i)));
-
 
 #endif // FONT_H_INCLUDED

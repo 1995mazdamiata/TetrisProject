@@ -14,13 +14,14 @@ Date Last Modified: 5/4/2023
 #include "SDL_Plotter.h"
 #include "constants.h"
 
-/*
-Description: A class called block that deals with functions and
-variables that allow for the creation and movement of tetris blocks.
-Precondition: A block object must exist.
-Postcondition: The class returns various things depending on the
-block functions.
-Return: Void, Point, Tile, Block, color, blockType, and int
+
+/* 
+Description: A block class that contains private variables and
+public functions that arrange tiles together into blocks.
+Precondition: The game must be started and the player must not have
+lost yet.
+Postcondition: Functions allow the block to be moved and acted on in other ways.
+Return: Point, color, blockType, int, tile, or void
 */
 
 class Block{

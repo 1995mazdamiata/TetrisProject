@@ -129,11 +129,11 @@ int main(int argc, char ** argv)
         else if(gameOver) {
             drawBackground(g, RED);
             displayString(g, "GAME OVER", 100, 300, 3);
-            displayString(g, "PRESS ANY KEY TO CONTINUE", 120,375,1);
+            displayString(g, "PRESS DOWN ARROW TO CONTINUE", 90,375,1);
 
             if(g.kbhit()) {
                 key = g.getKey();
-                if(key = DOWN_ARROW) {
+                if(key == DOWN_ARROW) {
                     gameOver = false;
                     start = false;
                     initialize = true;
@@ -144,4 +144,5 @@ int main(int argc, char ** argv)
             g.Sleep(100);
         }
     }
+    return 0;
 }
