@@ -38,8 +38,6 @@ int main(int argc, char ** argv)
             drawBackground(g, START);
             displayString(g, "TETRIS", 145,300,3);
             displayString(g, "PRESS ANY KEY TO BEGIN", 120,375,1);
-            displayString(g, "UP ARROW TO ROTATE", 145,600,1);
-            displayString(g,"LEFT AND RIGHT ARROWS TO MOVE", 75,650,1);
             if(g.kbhit()) {
                 start = true;
             }
@@ -136,4 +134,5 @@ int main(int argc, char ** argv)
             g.Sleep(100);
         }
     }
+    return 0;
 }
